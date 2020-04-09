@@ -35,10 +35,11 @@ $pdf->writeHTMLCell(40, '274', '1', '1', $left_column, 1, 0, 1, true, 'J', true)
 
 //add 
 $title = '
-<div><h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PharmacoGenomex<sub>2</sub></h1></div>
+<div><h1>&nbsp;&nbsp;PharmacoGenomeX<sub>2</sub></h1></div>
 <style>
 h1 {
 	color: #FFFFFF;
+	font-size: 24px;
 }
 </style>
 ';
@@ -119,7 +120,7 @@ $sign = '<p><strong>Электронная подпись</strong></p>
 ';
 
 // output the sign
-$pdf->WriteHTMLCell(90, 20, '80', '242', "$sign", 0,0);
+$pdf->WriteHTMLCell(140, 20, '60', '242', "$sign", 0,0);
  
  
  //outptut 
@@ -219,7 +220,7 @@ $table_genes = '
 <td>*17</td>
 <td>rs12248560</td>
 <td>TT</td>
-<td>??</td>
+<td>&uarr;&uarr;</td>
 </tr>
 <tr>
 <td style="color: #FFFFFF; background-color: #77323D;">CYP2D6</td>
@@ -227,7 +228,7 @@ $table_genes = '
 <td>*4</td>
 <td>rs3892097</td>
 <td>AA</td>
-<td>??</td>
+<td>&darr;&darr;</td>
 </tr>
 <tr>
 <td style="color: #FFFFFF; background-color: #5DACA1;">CYP3A4</td>
@@ -293,3 +294,4 @@ $pdf->WriteHTMLCell(160, 90, '30', '120', "$text_page2", 0,0);
 
 //outptut 
  $pdf->Output();
+ 
