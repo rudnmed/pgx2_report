@@ -347,7 +347,20 @@ $pdf->WriteHTMLCell(30, 20, '138', '227', "<small>CYP3A4*22</small>");
 $pdf->WriteHTMLCell(30, 20, '160', '227', "<small>CYP3A5*3</small>");
 $pdf->WriteHTMLCell(30, 20, '182', '227', "<small>ABCB1*6</small>");
 
+//sign of doctor
+$sign = '<p><strong>Электронная подпись</strong></p>
+<p>Застрожин Михаил Сергеевич, к.м.н.,<br>руководитель лаборатории генетики МНПЦ наркологии ДЗМ</p>
+<style>
+  p {
+	color: #000000;
+	text-align: right;
+	font-size: 11px;
+}
+</style>
+';
 
+// output the sign
+$pdf->WriteHTMLCell(140, 20, '60', '249', "$sign", 0,0);
 
 // Regular triangle
 //$pdf->Text(5, 169, '');
