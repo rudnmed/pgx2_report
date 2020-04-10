@@ -46,7 +46,7 @@ h1 {
 
 
 //right block
-$pdf->WriteHTMLCell(170, 40, '90', '0', "", 1,0);
+$pdf->WriteHTMLCell(170, 48, '90', '0', "", 1,0);
 $pdf->WriteHTMLCell(120, 32, '100', '1', "$title", 1,0, 'J', true);
 
 
@@ -63,7 +63,7 @@ h4 {
 
 // output the content
 //$pdf->writeHTML($text_intro, true, false, true, false, '45');
-$pdf->WriteHTMLCell(120, 30, '80', '50', "$text_intro", 0,0);
+$pdf->WriteHTMLCell(120, 30, '80', '55', "$text_intro", 0,0);
 
 // Image
 $pdf->Image('web_medium.png', 45, 75, 180, 120, 'PNG', '', '', true, 150, '', false, false, 1, false, false, false);
@@ -120,7 +120,7 @@ $sign = '<p><strong>Электронная подпись</strong></p>
 ';
 
 // output the sign
-$pdf->WriteHTMLCell(140, 20, '60', '242', "$sign", 0,0);
+$pdf->WriteHTMLCell(140, 20, '60', '249', "$sign", 0,0);
  
  
  //outptut 
@@ -130,10 +130,31 @@ $pdf->WriteHTMLCell(140, 20, '60', '242', "$sign", 0,0);
 
 //add second page 
   $pdf->AddPage();
+ 
   
+// create left column text
+/*
+$left_column_text = '
+<p>text</p>
+<style>
+p {
+	text-align: center;
+	color: #000000;
+}
+</style>
+';
+*/
 
-// create left column
-$left_column = '';
+$pdf->SetDrawColor(0);
+$pdf->SetTextColor(0);
+// Start Transformation
+$pdf->StartTransform();
+// Rotate 20 degrees counter-clockwise centered by (70,110) which is the lower left corner of the rectangle
+$pdf->Rotate(90, 58, 145);
+//$pdf->Rect(70, 100, 40, 10, 'D');
+$pdf->Text(40, 96, '');
+// Stop Transformation
+$pdf->StopTransform();
 
 
 //left column
@@ -141,10 +162,12 @@ $left_column = '';
 $pdf->SetFillColor(75, 120, 114);
 
 // set color for text - none
-$pdf->SetTextColor();
+//$pdf->SetTextColor();
+
 
 // write the left column
 $pdf->writeHTMLCell(22, '274', '1', '1', $left_column, 1, 0, 1, true, 'J', true);
+//$pdf->writeHTMLCell(30, '260', '1', '1', $left_column_text, 0, 0);
 
 
 //table of patient
@@ -274,7 +297,6 @@ td {
 //table of genes output
 $pdf->WriteHTMLCell(170, 70, '30', '64', "$table_genes", 0,0);
 
-
 //text for second page
 $text_page2 = '
 <p>Имеются данные, свидетельствующие о наличии генетически обусловленных отклонений в скорости метаболизма, что может увеличить риск развития нежелательных реакций на назначаемые лекарственные препараты и, в связи с этим, недостаточной эффективности терапии.</p>
@@ -291,7 +313,50 @@ $text_page2 = '
 // output the text
 $pdf->WriteHTMLCell(160, 90, '30', '120', "$text_page2", 0,0);
 
+//graph 
+$style = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'phase' => 0, 'color' => array(0, 0, 0));
+$style2 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0));
+$style3 = array('width' => 0.5, 'cap' => 'round', 'join' => 'round', 'dash' => 0, 'color' => array(0, 0, 0));
+$style4 = array('L' => 0,
+                'T' => array('width' => 0.25, 'cap' => 'butt', 'join' => 'miter', 'dash' => '20,10', 'phase' => 10, 'color' => array(100, 100, 255)),
+                'R' => array('width' => 0.50, 'cap' => 'round', 'join' => 'miter', 'dash' => 0, 'color' => array(50, 50, 127)),
+                'B' => array('width' => 0.75, 'cap' => 'square', 'join' => 'miter', 'dash' => '30,10,5,10'));
+$style5 = array('width' => 0.25, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 64, 128));
+$style6 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => '10,10', 'color' => array(0, 128, 0));
+$style7 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(255, 128, 0));
+
+
+
+$pdf->Line(40, 180, 40, 220, $style2);
+$pdf->Line(42, 201, 196, 201, $style3);
+
+//text for the graph persent
+$pdf->WriteHTMLCell(15, 10, '27', '179', "<small>200%</small>");
+$pdf->WriteHTMLCell(15, 10, '27', '189', "<small>150%</small>");
+$pdf->WriteHTMLCell(15, 10, '27', '199', "<small>100%</small>");
+$pdf->WriteHTMLCell(15, 10, '29', '209', "<small>50%</small>");
+$pdf->WriteHTMLCell(15, 10, '30', '219', "<small>0%</small>");
+
+//text down graph
+$pdf->WriteHTMLCell(30, 20, '28', '227', "<small>Активность</small>");
+$pdf->WriteHTMLCell(30, 20, '50', '227', "<small>CYP2C19*2</small>");
+$pdf->WriteHTMLCell(30, 20, '72', '227', "<small>CYP2C19*3</small>");
+$pdf->WriteHTMLCell(30, 20, '94', '227', "<small>CYP2C19*17</small>");
+$pdf->WriteHTMLCell(30, 20, '118', '227', "<small>CYP2D6*4</small>");
+$pdf->WriteHTMLCell(30, 20, '138', '227', "<small>CYP3A4*22</small>");
+$pdf->WriteHTMLCell(30, 20, '160', '227', "<small>CYP3A5*3</small>");
+$pdf->WriteHTMLCell(30, 20, '182', '227', "<small>ABCB1*6</small>");
+
+
+
+// Regular triangle
+//$pdf->Text(5, 169, '');
+//$pdf->SetLineStyle($style5);
+//$pdf->RegularPolygon(126, 207, 12, 3, 0, '', array('all' => $style5), array(200, 220, 200), '', array(255, 200, 100));
+
+
+
 
 //outptut 
- $pdf->Output();
+ $pdf->Output('example.pdf', 'I');
  
