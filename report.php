@@ -24,7 +24,7 @@ $left_column = '';
 
 
 //left column
-// set color for background
+//and set color for background
 $pdf->SetFillColor(75, 120, 114);
 
 // set color for text - none
@@ -44,11 +44,9 @@ h1 {
 </style>
 ';
 
-
 //right block
 $pdf->WriteHTMLCell(170, 48, '90', '0', "", 1,0);
 $pdf->WriteHTMLCell(120, 32, '100', '1', "$title", 1,0, 'J', true);
-
 
 //text content
 $text_intro = '<h4>Результаты генотипирования<br> и рекомендации<br> по персонализированной терапии</h4>
@@ -326,7 +324,6 @@ $style6 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => '1
 $style7 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(255, 128, 0));
 
 
-
 $pdf->Line(40, 180, 40, 220, $style2);
 $pdf->Line(42, 201, 196, 201, $style3);
 
@@ -366,8 +363,6 @@ $pdf->WriteHTMLCell(140, 20, '60', '249', "$sign", 0,0);
 //$pdf->Text(5, 169, '');
 //$pdf->SetLineStyle($style5);
 //$pdf->RegularPolygon(126, 207, 12, 3, 0, '', array('all' => $style5), array(200, 220, 200), '', array(255, 200, 100));
-
-
 
 
 //outptut 
