@@ -350,13 +350,12 @@ $pdf->WriteHTMLCell(30, 20, '182', '227', "<small>ABCB1*6</small>");
 
 
 // Regular triangles
-$pdf->WriteHTMLCell(30, 20, '99', '193', "<small>+95%</small>");
-$pdf->SetLineStyle($style7);
-$pdf->RegularPolygon(105, 195, 12, 3, 60, 0, 'F', array('all' => $style7), array(52, 65, 173), '', array(255, 200, 100));
 
-$pdf->WriteHTMLCell(30, 20, '121', '206', "<small>-95%</small>");
-$pdf->SetLineStyle($style7);
-$pdf->RegularPolygon(126, 207, 12, 3, 0, 0, 'F', array('all' => $style7), array(168, 24, 21), '', array(255, 200, 200));
+//$pdf->Text(120, 210, '-95%');
+$pdf->RegularPolygon(105, 195, 12, 3, 60, 0, 'F', array('all' => $style7), array(52, 65, 173), 'F', array(255, 200, 100));
+
+
+$pdf->RegularPolygon(126, 207, 12, 3, 0, 0, 'F', array('all' => $style7), array(168, 24, 21), 'F', array());
 
 
 //sign of doctor
@@ -374,6 +373,25 @@ $sign = '<p><strong>Электронная подпись</strong></p>
 // output the sign
 $pdf->WriteHTMLCell(140, 20, '60', '249', "$sign", 0,0);
 
+
+//add third page 
+  $pdf->AddPage('L', 'A4');
+  
+  //table
+// set color for background
+$pdf->SetFillColor(75, 120, 114);
+
+// set color for text
+$pdf->SetTextColor(255, 255, 255);
+
+// write header
+$pdf->writeHTMLCell(295, '30', '1', '1', 'СПЕЦИФИЧЕСКИЕ РЕКОМЕНДАЦИИ', 1, 0, 1, true, 'J', true);
+  
+
+//table of patient land
+$pdf->WriteHTMLCell(295, 20, '1', '32', "", 1,0);
+
 //outptut 
  $pdf->Output('example.pdf', 'I');
+ 
  
