@@ -24,7 +24,7 @@ $left_column = '';
 
 
 //left column
-//and set color for background
+// set color for background
 $pdf->SetFillColor(75, 120, 114);
 
 // set color for text - none
@@ -44,9 +44,11 @@ h1 {
 </style>
 ';
 
+
 //right block
 $pdf->WriteHTMLCell(170, 48, '90', '0', "", 1,0);
 $pdf->WriteHTMLCell(120, 32, '100', '1', "$title", 1,0, 'J', true);
+
 
 //text content
 $text_intro = '<h4>Результаты генотипирования<br> и рекомендации<br> по персонализированной терапии</h4>
@@ -319,9 +321,10 @@ $style4 = array('L' => 0,
                 'T' => array('width' => 0.25, 'cap' => 'butt', 'join' => 'miter', 'dash' => '20,10', 'phase' => 10, 'color' => array(100, 100, 255)),
                 'R' => array('width' => 0.50, 'cap' => 'round', 'join' => 'miter', 'dash' => 0, 'color' => array(50, 50, 127)),
                 'B' => array('width' => 0.75, 'cap' => 'square', 'join' => 'miter', 'dash' => '30,10,5,10'));
-//$style5 = array('width' => 0.25, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 64, 128));
-//$style6 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => '10,10', 'color' => array(0, 128, 0));
-//$style7 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(255, 128, 0));
+$style5 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(49, 21, 168));
+$style6 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => '10,10', 'color' => array(0, 128, 0));
+$style7 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(168, 24, 21));
+
 
 
 $pdf->Line(40, 180, 40, 220, $style2);
@@ -344,6 +347,16 @@ $pdf->WriteHTMLCell(30, 20, '138', '227', "<small>CYP3A4*22</small>");
 $pdf->WriteHTMLCell(30, 20, '160', '227', "<small>CYP3A5*3</small>");
 $pdf->WriteHTMLCell(30, 20, '182', '227', "<small>ABCB1*6</small>");
 
+
+
+// Regular triangle
+//$pdf->Text(5, 169, '');
+$pdf->SetLineStyle($style7);
+$pdf->RegularPolygon(126, 207, 12, 3, 0, '', array('all' => $style7), array(200, 220, 200), '', array(255, 200, 100));
+$pdf->SetLineStyle($style5);
+$pdf->RegularPolygon(105, 195, 12, 3, 60, '', array('all' => $style5), array(200, 220, 200), '', array(255, 200, 100));
+
+
 //sign of doctor
 $sign = '<p><strong>Электронная подпись</strong></p>
 <p>Застрожин Михаил Сергеевич, к.м.н.,<br>руководитель лаборатории генетики МНПЦ наркологии ДЗМ</p>
@@ -358,12 +371,6 @@ $sign = '<p><strong>Электронная подпись</strong></p>
 
 // output the sign
 $pdf->WriteHTMLCell(140, 20, '60', '249', "$sign", 0,0);
-
-// Regular triangle
-//$pdf->Text(5, 169, '');
-//$pdf->SetLineStyle($style5);
-//$pdf->RegularPolygon(126, 207, 12, 3, 0, '', array('all' => $style5), array(200, 220, 200), '', array(255, 200, 100));
-
 
 //outptut 
  $pdf->Output('example.pdf', 'I');
