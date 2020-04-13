@@ -349,12 +349,15 @@ $pdf->WriteHTMLCell(30, 20, '182', '227', "<small>ABCB1*6</small>");
 
 
 
-// Regular triangle
-//$pdf->Text(5, 169, '');
-$pdf->SetLineStyle($style7);
-$pdf->RegularPolygon(126, 207, 12, 3, 0, '', array('all' => $style7), array(200, 220, 200), '', array(255, 200, 100));
+// Regular triangles
+$pdf->WriteHTMLCell(30, 20, '99', '193', "<small>+95%</small>");
 $pdf->SetLineStyle($style5);
 $pdf->RegularPolygon(105, 195, 12, 3, 60, '', array('all' => $style5), array(200, 220, 200), '', array(255, 200, 100));
+
+$pdf->WriteHTMLCell(30, 20, '121', '206', "<small>-95%</small>");
+$pdf->SetLineStyle($style7);
+$pdf->RegularPolygon(126, 207, 12, 3, 0, 0, '', array('all' => $style7), array(168, 24, 21), '', array(255, 200, 200));
+
 
 
 //sign of doctor
