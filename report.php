@@ -10,19 +10,14 @@
 //$pdf->SetFont('Helvetica', '', 19);
 $pdf->SetFont('dejavusans', '', 14, '', true);
   
- 
  //header and footer - off
   $pdf->setPrintHeader(false);
   $pdf->setPrintFooter(false);
 
+
  //add first page 
   $pdf->AddPage();
   
-
-// create left column
-//$left_column = '';
-
-
 // set color for background for left column
 $pdf->SetFillColor(75, 120, 114);
 
@@ -119,8 +114,6 @@ $sign = '<p><strong>Электронная подпись</strong></p>
 
 // output the sign
 $pdf->WriteHTMLCell(140, 20, '60', '249', "$sign", 0,0);
- 
-
  
 
 //add second page 
@@ -298,7 +291,6 @@ $text_page2 = '
 $pdf->WriteHTMLCell(160, 90, '30', '120', "$text_page2", 0,0);
 
 
-
 //graph 
 $style = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'phase' => 0, 'color' => array(0, 0, 0));
 $style2 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0));
@@ -331,7 +323,6 @@ $pdf->WriteHTMLCell(30, 20, '118', '227', "<small>CYP2D6*4</small>");
 $pdf->WriteHTMLCell(30, 20, '138', '227', "<small>CYP3A4*22</small>");
 $pdf->WriteHTMLCell(30, 20, '160', '227', "<small>CYP3A5*3</small>");
 $pdf->WriteHTMLCell(30, 20, '182', '227', "<small>ABCB1*6</small>");
-
 
 
 // Regular triangles up
@@ -381,7 +372,6 @@ $pdf->WriteHTMLCell(140, 20, '60', '249', "$sign", 0,0);
 
 
 
-
 //add third page 
   $pdf->AddPage('L', 'A4');
   
@@ -396,8 +386,7 @@ $pdf->SetTextColor(255, 255, 255);
 $pdf->writeHTMLCell(295, '22', '1', '1', '', 1, 0, 1, true, 'J', true);
   
 
-
-//table patient land
+//table patient landscape
 $table_spec = '
 <table>
 <tr>
