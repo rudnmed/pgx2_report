@@ -3,7 +3,6 @@
   include('library/tcpdf.php'); 
 
  //make tcpdf object 
-  //$pdf = new TCPDF('P', 'mm', 'A4', 'UTF-8');
   $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8');
   
    // set font
