@@ -1,8 +1,9 @@
 <?php 
+
  //include library
   include('library/tcpdf.php'); 
 
- //make tcpdf object 
+ //make tcpdf object
   $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8');
   
    // set font
@@ -10,7 +11,7 @@
 $pdf->SetFont('dejavusans', '', 14, '', true);
   
  
- //header and footer
+ //header and footer - off
   $pdf->setPrintHeader(false);
   $pdf->setPrintFooter(false);
 
@@ -19,20 +20,19 @@ $pdf->SetFont('dejavusans', '', 14, '', true);
   
 
 // create left column
-$left_column = '';
+//$left_column = '';
 
 
-//left column
-// set color for background
+// set color for background for left column
 $pdf->SetFillColor(75, 120, 114);
 
-// set color for text - none
-$pdf->SetTextColor();
+// set color for text
+//$pdf->SetTextColor();
 
 // write the left column
-$pdf->writeHTMLCell(40, '274', '1', '1', $left_column, 1, 0, 1, true, 'J', true);
+$pdf->writeHTMLCell(40, '274', '1', '1', '', 1, 0, 1, true);
 
-//add 
+//add title
 $title = '
 <div><h1>&nbsp;&nbsp;PharmacoGenomeX<sub>2</sub></h1></div>
 <style>
@@ -44,9 +44,9 @@ h1 {
 ';
 
 
-//right block
-$pdf->WriteHTMLCell(170, 48, '90', '0', "", 1,0);
-$pdf->WriteHTMLCell(120, 32, '100', '1', "$title", 1,0, 'J', true);
+//right block for title
+$pdf->WriteHTMLCell(170, 48, '90', '0', "", 1,0); //box 1
+$pdf->WriteHTMLCell(120, 32, '100', '1', "$title", 1,0, 'J', true); //box 2
 
 
 //text content
@@ -61,7 +61,6 @@ h4 {
 ';
 
 // output the content
-//$pdf->writeHTML($text_intro, true, false, true, false, '45');
 $pdf->WriteHTMLCell(120, 30, '80', '55', "$text_intro", 0,0);
 
 // Image
@@ -121,37 +120,20 @@ $sign = '<p><strong>Электронная подпись</strong></p>
 // output the sign
 $pdf->WriteHTMLCell(140, 20, '60', '249', "$sign", 0,0);
  
- 
- //outptut 
- //$pdf->Output();
- 
+
  
 
 //add second page 
   $pdf->AddPage();
  
-  
-// create left column text
-/*
-$left_column_text = '
-<p>text</p>
-<style>
-p {
-	text-align: center;
-	color: #000000;
-}
-</style>
-';
-*/
 
-$pdf->SetDrawColor(0);
-$pdf->SetTextColor(0);
 // Start Transformation
 $pdf->StartTransform();
-// Rotate 20 degrees counter-clockwise centered by (70,110) which is the lower left corner of the rectangle
+// Rotate of degrees
 $pdf->Rotate(90, 58, 145);
-//$pdf->Rect(70, 100, 40, 10, 'D');
-$pdf->Text(40, 96, '');
+$pdf->SetDrawColor(255);
+$pdf->SetTextColor(255);
+$pdf->Text(40, 95, 'ОБЩИЕ РЕКОМЕНДАЦИИ');
 // Stop Transformation
 $pdf->StopTransform();
 
@@ -161,7 +143,7 @@ $pdf->StopTransform();
 $pdf->SetFillColor(75, 120, 114);
 
 // set color for text - none
-//$pdf->SetTextColor();
+$pdf->SetTextColor(0);
 
 
 // write the left column
@@ -201,6 +183,7 @@ $table1 = '
 <style>
 table {
 	font-size: 11px;
+	border: solid 1px #000000;
 }
 </style>
 ';
@@ -285,6 +268,8 @@ th {
 	color: #FFFFFF;
 	background-color: #4B7872;
 	text-align: center;
+	width: 85px;
+	height: 18px;
 }
 td {
 	font-size: 10px;
@@ -294,7 +279,7 @@ td {
 ';
 
 //table of genes output
-$pdf->WriteHTMLCell(170, 70, '30', '64', "$table_genes", 0,0);
+$pdf->WriteHTMLCell(165, 70, '25', '64', "$table_genes", 0,0);
 
 //text for second page
 $text_page2 = '
@@ -312,6 +297,8 @@ $text_page2 = '
 // output the text
 $pdf->WriteHTMLCell(160, 90, '30', '120', "$text_page2", 0,0);
 
+
+
 //graph 
 $style = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'phase' => 0, 'color' => array(0, 0, 0));
 $style2 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0));
@@ -323,7 +310,6 @@ $style4 = array('L' => 0,
 $style5 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(49, 21, 168));
 $style6 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => '10,10', 'color' => array(0, 128, 0));
 $style7 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(168, 24, 21));
-
 
 
 $pdf->Line(40, 180, 40, 220, $style2);
@@ -348,13 +334,34 @@ $pdf->WriteHTMLCell(30, 20, '182', '227', "<small>ABCB1*6</small>");
 
 
 
-// Regular triangles
+// Regular triangles up
+$pdf->RegularPolygon(105, 195, 12, 3, 60, '', 'DF', $style6, array(50, 59, 159));
+// text fo triangles
+$persent_up = '
+<p>+95%</p>
+<style>
+p {
+	color: #FFFFFF;
+	font-size: 9px;
+}
+</style> 
+';
+$pdf->WriteHTMLCell(20, 20, '99', '193', $persent_up);
 
-//$pdf->Text(120, 210, '-95%');
-$pdf->RegularPolygon(105, 195, 12, 3, 60, 0, 'F', array('all' => $style7), array(52, 65, 173), 'F', array(255, 200, 100));
 
-
-$pdf->RegularPolygon(126, 207, 12, 3, 0, 0, 'F', array('all' => $style7), array(168, 24, 21), 'F', array());
+// Regular triangles down
+$pdf->RegularPolygon(125, 207, 12, 3, 0, '', 'DF', $style6, array(168, 24, 48));
+// text fo triangles
+$persent_down = '
+<p>-95%</p>
+<style>
+p {
+	color: #FFFFFF;
+	font-size: 9px;
+}
+</style>
+';
+$pdf->WriteHTMLCell(20, 20, '120', '205', $persent_down);
 
 
 //sign of doctor
@@ -373,6 +380,8 @@ $sign = '<p><strong>Электронная подпись</strong></p>
 $pdf->WriteHTMLCell(140, 20, '60', '249', "$sign", 0,0);
 
 
+
+
 //add third page 
   $pdf->AddPage('L', 'A4');
   
@@ -384,11 +393,89 @@ $pdf->SetFillColor(75, 120, 114);
 $pdf->SetTextColor(255, 255, 255);
 
 // write header
-$pdf->writeHTMLCell(295, '30', '1', '1', 'СПЕЦИФИЧЕСКИЕ РЕКОМЕНДАЦИИ', 1, 0, 1, true, 'J', true);
+$pdf->writeHTMLCell(295, '22', '1', '1', '', 1, 0, 1, true, 'J', true);
   
 
+
+//table patient land
+$table_spec = '
+<table>
+<tr>
+<th style="color: #FFFFFF; background-color: #5DACA1;">СИОЗС</th>
+<th style="color: #FFFFFF; background-color: #5DACA1;">РЕКОМЕНДАЦИИ</th>
+<th style="color: #FFFFFF; background-color: #5DACA1;">ФАРМАКО<br>ДИНАМИКА</th>
+<th style="color: #FFFFFF; background-color: #5DACA1;">ДЕЙСТВИЕ</th>
+<th style="color: #FFFFFF; background-color: #5DACA1;">ФАРМАКО<br>КИНЕТИКА</th>
+<th style="color: #FFFFFF; background-color: #5DACA1;">ДЕЙСТВИЕ</th>
+<th style="color: #FFFFFF; background-color: #5DACA1;">ПОЛИПРАГМАЗИЯ<br>И ДРУГИЕ ФАКТОРЫ</th>
+</tr>
+<tr><br>
+<td style="color: #4B7872">Серталин<br>Золофт&reg;</td>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr><br>
+<tr><br>
+<td style="color: #4B7872">Флувоксамин<br>Феварин&reg;</td>
+<td>2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr><br>
+<tr><br>
+<td style="color: #4B7872">Флуоксетин<br>Прозак&reg;</td>
+<td>3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr><br>
+<tr><br>
+<td style="color: #4B7872">Циталопрам<br>Ципрамил&reg;</td>
+<td>4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr><br>
+<tr><br>
+<td style="color: #4B7872">Эскиталопрам<br>Ципралек&reg;</td>
+<td>5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr><br>
+</table>
+
+<style>
+th {
+	font-size: 12px;
+	//font-weight: bold;
+	color: #FFFFFF;
+	background-color: #4B7872;
+	text-align: center;
+}
+td {
+	font-size: 11px;
+	text-align: center;
+	font-weight: bold;
+	color: #000000;
+}
+</style>
+';
+
 //table of patient land
-$pdf->WriteHTMLCell(295, 20, '1', '32', "", 1,0);
+$pdf->WriteHTMLCell(295, 15, '1', '24', "$table_spec", 0, 0);
+
+
+//box down
+//$pdf->WriteHTMLCell(220, 22, '1', '160', 1, 1);
+
+
 
 //outptut 
  $pdf->Output('example.pdf', 'I');
