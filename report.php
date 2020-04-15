@@ -10,14 +10,19 @@
 //$pdf->SetFont('Helvetica', '', 19);
 $pdf->SetFont('dejavusans', '', 14, '', true);
   
+ 
  //header and footer - off
   $pdf->setPrintHeader(false);
   $pdf->setPrintFooter(false);
 
-
  //add first page 
   $pdf->AddPage();
   
+
+// create left column
+//$left_column = '';
+
+
 // set color for background for left column
 $pdf->SetFillColor(75, 120, 114);
 
@@ -114,6 +119,8 @@ $sign = '<p><strong>Электронная подпись</strong></p>
 
 // output the sign
 $pdf->WriteHTMLCell(140, 20, '60', '249', "$sign", 0,0);
+ 
+
  
 
 //add second page 
@@ -291,6 +298,7 @@ $text_page2 = '
 $pdf->WriteHTMLCell(160, 90, '30', '120', "$text_page2", 0,0);
 
 
+
 //graph 
 $style = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'phase' => 0, 'color' => array(0, 0, 0));
 $style2 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0));
@@ -323,6 +331,7 @@ $pdf->WriteHTMLCell(30, 20, '118', '227', "<small>CYP2D6*4</small>");
 $pdf->WriteHTMLCell(30, 20, '138', '227', "<small>CYP3A4*22</small>");
 $pdf->WriteHTMLCell(30, 20, '160', '227', "<small>CYP3A5*3</small>");
 $pdf->WriteHTMLCell(30, 20, '182', '227', "<small>ABCB1*6</small>");
+
 
 
 // Regular triangles up
@@ -372,6 +381,7 @@ $pdf->WriteHTMLCell(140, 20, '60', '249', "$sign", 0,0);
 
 
 
+
 //add third page 
   $pdf->AddPage('L', 'A4');
   
@@ -380,13 +390,25 @@ $pdf->WriteHTMLCell(140, 20, '60', '249', "$sign", 0,0);
 $pdf->SetFillColor(75, 120, 114);
 
 // set color for text
-$pdf->SetTextColor(255, 255, 255);
+//$pdf->SetTextColor(255, 255, 255);
 
 // write header
-$pdf->writeHTMLCell(295, '22', '1', '1', '', 1, 0, 1, true, 'J', true);
+$header_table_spec = '
+<h4>СПЕЦИФИЧЕСКИЕ РЕКОМЕНДАЦИИ</h4>
+<style>
+h4 {
+	//font-size: 16px;
+	text-align: center;
+	color: #FFFFFF;
+}
+</style>
+';
+
+$pdf->writeHTMLCell(295, '22', '1', '1', $header_table_spec, 1, 0, 1, true, 'J', true);
   
 
-//table patient landscape
+
+//table patient land
 $table_spec = '
 <table>
 <tr>
@@ -401,42 +423,42 @@ $table_spec = '
 <tr><br>
 <td style="color: #4B7872">Серталин<br>Золофт&reg;</td>
 <td>1</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
 </tr><br>
 <tr><br>
 <td style="color: #4B7872">Флувоксамин<br>Феварин&reg;</td>
 <td>2</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
 </tr><br>
 <tr><br>
 <td style="color: #4B7872">Флуоксетин<br>Прозак&reg;</td>
 <td>3</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
 </tr><br>
 <tr><br>
 <td style="color: #4B7872">Циталопрам<br>Ципрамил&reg;</td>
 <td>4</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
 </tr><br>
 <tr><br>
 <td style="color: #4B7872">Эскиталопрам<br>Ципралек&reg;</td>
 <td>5</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>5</td>
+<td>5</td>
+<td>5</td>
+<td>5</td>
 </tr><br>
 </table>
 
@@ -461,12 +483,11 @@ td {
 $pdf->WriteHTMLCell(295, 15, '1', '24', "$table_spec", 0, 0);
 
 
-//box down
-//$pdf->WriteHTMLCell(220, 22, '1', '160', 1, 1);
+//box unknown 
+$pdf->WriteHTMLCell(220, 22, '1', '160', '', 1, 1);
 
 
 
 //outptut 
  $pdf->Output('example.pdf', 'I');
- 
  
