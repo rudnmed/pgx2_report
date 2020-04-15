@@ -3,7 +3,7 @@
  //include library
   include('library/tcpdf.php'); 
 
- //make tcpdf object
+ //make object
   $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8');
   
    // set font
@@ -18,11 +18,6 @@ $pdf->SetFont('dejavusans', '', 14, '', true);
  //add first page 
   $pdf->AddPage();
   
-
-// create left column
-//$left_column = '';
-
-
 // set color for background for left column
 $pdf->SetFillColor(75, 120, 114);
 
@@ -43,11 +38,9 @@ h1 {
 </style>
 ';
 
-
 //right block for title
 $pdf->WriteHTMLCell(170, 48, '90', '0', "", 1,0); //box 1
 $pdf->WriteHTMLCell(120, 32, '100', '1', "$title", 1,0, 'J', true); //box 2
-
 
 //text content
 $text_intro = '<h4>Результаты генотипирования<br> и рекомендации<br> по персонализированной терапии</h4>
@@ -121,13 +114,10 @@ $sign = '<p><strong>Электронная подпись</strong></p>
 $pdf->WriteHTMLCell(140, 20, '60', '249', "$sign", 0,0);
  
 
- 
-
 //add second page 
   $pdf->AddPage();
  
-
-// Start Transformation
+// Start Transformation text
 $pdf->StartTransform();
 // Rotate of degrees
 $pdf->Rotate(90, 58, 145);
@@ -137,7 +127,6 @@ $pdf->Text(40, 95, 'ОБЩИЕ РЕКОМЕНДАЦИИ');
 // Stop Transformation
 $pdf->StopTransform();
 
-
 //left column
 // set color for background
 $pdf->SetFillColor(75, 120, 114);
@@ -145,11 +134,9 @@ $pdf->SetFillColor(75, 120, 114);
 // set color for text - none
 $pdf->SetTextColor(0);
 
-
 // write the left column
 $pdf->writeHTMLCell(22, '274', '1', '1', $left_column, 1, 0, 1, true, 'J', true);
 //$pdf->writeHTMLCell(30, '260', '1', '1', $left_column_text, 0, 0);
-
 
 //table of patient
 $table1 = '
@@ -190,7 +177,6 @@ table {
 
 //table of patient
 $pdf->WriteHTMLCell(120, 30, '23', '20', "$table1", 1,0);
-
 
 //table of genes
 $table_genes = '
@@ -297,9 +283,7 @@ $text_page2 = '
 // output the text
 $pdf->WriteHTMLCell(160, 90, '30', '120', "$text_page2", 0,0);
 
-
-
-//graph 
+//graph
 $style = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'phase' => 0, 'color' => array(0, 0, 0));
 $style2 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0));
 $style3 = array('width' => 0.5, 'cap' => 'round', 'join' => 'round', 'dash' => 0, 'color' => array(0, 0, 0));
@@ -310,7 +294,6 @@ $style4 = array('L' => 0,
 $style5 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(49, 21, 168));
 $style6 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => '10,10', 'color' => array(0, 128, 0));
 $style7 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(168, 24, 21));
-
 
 $pdf->Line(40, 180, 40, 220, $style2);
 $pdf->Line(42, 201, 196, 201, $style3);
@@ -331,7 +314,6 @@ $pdf->WriteHTMLCell(30, 20, '118', '227', "<small>CYP2D6*4</small>");
 $pdf->WriteHTMLCell(30, 20, '138', '227', "<small>CYP3A4*22</small>");
 $pdf->WriteHTMLCell(30, 20, '160', '227', "<small>CYP3A5*3</small>");
 $pdf->WriteHTMLCell(30, 20, '182', '227', "<small>ABCB1*6</small>");
-
 
 
 // Regular triangles up
@@ -363,7 +345,6 @@ p {
 ';
 $pdf->WriteHTMLCell(20, 20, '120', '205', $persent_down);
 
-
 //sign of doctor
 $sign = '<p><strong>Электронная подпись</strong></p>
 <p>Застрожин Михаил Сергеевич, к.м.н.,<br>руководитель лаборатории генетики МНПЦ наркологии ДЗМ</p>
@@ -378,8 +359,6 @@ $sign = '<p><strong>Электронная подпись</strong></p>
 
 // output the sign
 $pdf->WriteHTMLCell(140, 20, '60', '249', "$sign", 0,0);
-
-
 
 
 //add third page 
@@ -406,8 +385,6 @@ h4 {
 
 $pdf->writeHTMLCell(295, '22', '1', '1', $header_table_spec, 1, 0, 1, true, 'J', true);
   
-
-
 //table patient land
 $table_spec = '
 <table>
@@ -482,11 +459,13 @@ td {
 //table of patient land
 $pdf->WriteHTMLCell(295, 15, '1', '24', "$table_spec", 0, 0);
 
-
 //box unknown 
 $pdf->WriteHTMLCell(220, 22, '1', '160', '', 1, 1);
 
 
+//add fourth page 
+  $pdf->AddPage('L', 'A4');
+  
 
 //outptut 
  $pdf->Output('example.pdf', 'I');
