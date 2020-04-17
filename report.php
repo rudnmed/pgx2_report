@@ -297,8 +297,6 @@ $text_page2 = '
 // output the text
 $pdf->WriteHTMLCell(160, 90, '30', '120', "$text_page2", 0,0);
 
-
-
 //graph 
 $style = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'phase' => 0, 'color' => array(0, 0, 0));
 $style2 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0));
@@ -331,7 +329,6 @@ $pdf->WriteHTMLCell(30, 20, '118', '227', "<small>CYP2D6*4</small>");
 $pdf->WriteHTMLCell(30, 20, '138', '227', "<small>CYP3A4*22</small>");
 $pdf->WriteHTMLCell(30, 20, '160', '227', "<small>CYP3A5*3</small>");
 $pdf->WriteHTMLCell(30, 20, '182', '227', "<small>ABCB1*6</small>");
-
 
 
 // Regular triangles up
@@ -380,8 +377,6 @@ $sign = '<p><strong>Электронная подпись</strong></p>
 $pdf->WriteHTMLCell(140, 20, '60', '249', "$sign", 0,0);
 
 
-
-
 //add third page 
   $pdf->AddPage('L', 'A4');
   
@@ -406,7 +401,6 @@ h4 {
 
 $pdf->writeHTMLCell(295, '24', '1', '1', $header_table_spec, 1, 0, 1, true, 'J', true);
   
-
 
 //table patient land
 $table_spec = '
@@ -487,12 +481,7 @@ td {
 ';
 
 //table of patient land
-$pdf->WriteHTMLCell(295, 15, '1', '26', "$table_spec", 0, 0);
-
-
-//box unknown 
-$pdf->WriteHTMLCell(220, 22, '1', '160', '', 1, 1);
-
+$pdf->WriteHTMLCell(290, 15, '3', '26', "$table_spec", 0, 0);
 
 
 //add fourth page 
@@ -600,7 +589,7 @@ td {
 
  
  //table of patient land
-$pdf->WriteHTMLCell(295, 15, '1', '26', "$table_extended", 0, 0); 
+$pdf->WriteHTMLCell(290, 15, '3', '26', "$table_extended", 0, 0); 
   
 
 //outptut 
