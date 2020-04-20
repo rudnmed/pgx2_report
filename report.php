@@ -3,10 +3,10 @@
  //include library
   include('library/tcpdf.php'); 
 
- //make tcpdf object
+ //make object
   $pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8');
   
-   // set font
+   // set fonts
 //$pdf->SetFont('Helvetica', '', 19);
 $pdf->SetFont('dejavusans', '', 14, '', true);
   
@@ -105,7 +105,7 @@ table {
 //table of patient
 $pdf->WriteHTMLCell(120, 30, '41', '200', "$table1", 1,0);
 
-//sign of doctor
+//signature
 $sign = '<p><strong>Электронная подпись</strong></p>
 <p>Застрожин Михаил Сергеевич, к.м.н.,<br>руководитель лаборатории генетики МНПЦ наркологии ДЗМ</p>
 <style>
@@ -117,25 +117,26 @@ $sign = '<p><strong>Электронная подпись</strong></p>
 </style>
 ';
 
-// output the sign
+// output the signature
 $pdf->WriteHTMLCell(140, 20, '60', '249', "$sign", 0,0);
  
 
- //add index page 
+ //add index page ?
   $pdf->AddPage();
+  
 
 //add second page 
   $pdf->AddPage();
  
 
-// Start Transformation
+// Start transformation
 $pdf->StartTransform();
 // Rotate of degrees
 $pdf->Rotate(90, 58, 145);
 $pdf->SetDrawColor(255);
 $pdf->SetTextColor(255);
 $pdf->Text(40, 95, 'ОБЩИЕ РЕКОМЕНДАЦИИ');
-// Stop Transformation
+// Stop transformation
 $pdf->StopTransform();
 
 
@@ -299,7 +300,6 @@ $text_page2 = '
 $pdf->WriteHTMLCell(160, 90, '30', '120', "$text_page2", 0,0);
 
 
-
 //graph 
 $style = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'phase' => 0, 'color' => array(0, 0, 0));
 $style2 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0));
@@ -335,7 +335,7 @@ $pdf->WriteHTMLCell(30, 20, '182', '227', "<small>ABCB1*6</small>");
 
 
 
-// Regular triangles up
+// Regular triangle UP
 $pdf->RegularPolygon(105, 195, 12, 3, 60, '', 'DF', $style6, array(50, 59, 159));
 // text fo triangles
 $persent_up = '
@@ -350,7 +350,7 @@ p {
 $pdf->WriteHTMLCell(20, 20, '99', '193', $persent_up);
 
 
-// Regular triangles down
+// Regular triangle DOWN
 $pdf->RegularPolygon(125, 207, 12, 3, 0, '', 'DF', $style6, array(168, 24, 48));
 // text fo triangles
 $persent_down = '
@@ -365,7 +365,7 @@ p {
 $pdf->WriteHTMLCell(20, 20, '120', '205', $persent_down);
 
 
-//sign of doctor
+//signature
 $sign = '<p><strong>Электронная подпись</strong></p>
 <p>Застрожин Михаил Сергеевич, к.м.н.,<br>руководитель лаборатории генетики МНПЦ наркологии ДЗМ</p>
 <style>
@@ -377,9 +377,8 @@ $sign = '<p><strong>Электронная подпись</strong></p>
 </style>
 ';
 
-// output the sign
+// output the signature
 $pdf->WriteHTMLCell(140, 20, '60', '249', "$sign", 0,0);
-
 
 
 
@@ -409,7 +408,7 @@ $pdf->writeHTMLCell(295, '24', '1', '1', $header_table_spec, 1, 0, 1, true, 'J',
   
 
 
-//table patient land
+//table patient landscape
 $table_spec = '
 <table>
 <tr>
@@ -596,11 +595,10 @@ td {
 ';
 
  
- //table of patient land
+ //table of patient landscape
 $pdf->WriteHTMLCell(290, 15, '3', '26', "$table_extended", 0, 0); 
   
 
 //outptut 
  $pdf->Output('example.pdf', 'I');
- 
  
