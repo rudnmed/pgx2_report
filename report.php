@@ -19,10 +19,6 @@ $pdf->SetFont('dejavusans', '', 14, '', true);
   $pdf->AddPage();
   
 
-// create left column
-//$left_column = '';
-
-
 // set color for background for left column
 $pdf->SetFillColor(75, 120, 114);
 
